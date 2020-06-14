@@ -21,16 +21,19 @@ const ResultItem = ({title, image_url, rating, reviews}) => {
 const style = StyleSheet.create({
     viewStyle:{
         // margin:10, 
-        minWidth:170
+        marginLeft:20,
+        // minWidth:170
     },
     imageStyle: {
-        width:150, 
-        height:100,
+        width:170, 
+        height:120,
+        marginBottom:5
         
     },
     titleStyle: {
         fontSize:18,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        marginBottom:2
     }, 
     subText: {
         color:'grey'

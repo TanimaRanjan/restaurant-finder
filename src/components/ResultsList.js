@@ -1,26 +1,36 @@
 import React from 'react'
-import { View, Text, FlatList, StyleSheet} from 'react-native'
+import { View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native'
+import { withNavigation } from 'react-navigation'
 import ResultItem from './ResultItem'
 
 
-const ResultsList = ({title, results }) => {
+const ResultsList = ({title, results, navigation}) => {
+
+    if(!results.length) {
+        return null
+    }
 
     return (
         <View style={style.viewStyle}>
-            <Text style={style.titleStyle}>{title} - {results.length} </Text>
-            <FlatList 
-                
+            <Text style={style.titleStyle}>{title}</Text>
+            <FlatList     
                 horizontal
                 data={results}
                 keyExtractor={(result) => result.id}
-
+                showsHorizontalScrollIndicator={false}
                 renderItem = {({item}) => {
-                   return  <ResultItem 
-                            title={item.name}
-                            image_url={item.image_url}
-                            rating={item.rating} 
-                            reviews={item.review_count} />
-                 }}
+                   return  (
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Detail', {id:item.id})}
+                        >
+                            <ResultItem 
+                                title={item.name}
+                                image_url={item.image_url}
+                                rating={item.rating} 
+                                reviews={item.review_count} />
+
+                        </TouchableOpacity>
+                    )}}
               />  
         </View>
     )
@@ -31,15 +41,18 @@ const ResultsList = ({title, results }) => {
 
 const style = StyleSheet.create({
     titleStyle: {
-        paddingBottom:10,
+        // paddingBottom:10,
         fontSize:18,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        marginHorizontal:20,
+        marginBottom:5
     }
     , 
     viewStyle: {
-        // marginTop:20,
-        paddingVertical:20
+        marginBottom:15,
+        // marginHorizontal:20,
+        // paddingVertical:20
     }
 })
 
-export default ResultsList
+export default withNavigation(ResultsList)
