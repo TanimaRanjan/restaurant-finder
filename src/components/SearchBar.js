@@ -31,8 +31,8 @@ const style = StyleSheet.create({
     viewStyle: {
         backgroundColor:'#DDD',
         height:50,
-        marginHorizontal:20,
-        marginTop:10,
+        // marginHorizontal:20,
+        // marginTop:10,
         borderRadius:5,
         // borderWidth:1,
         borderColor:'black',

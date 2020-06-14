@@ -1,8 +1,8 @@
 import React, { useState , useEffect } from 'react'
 import { View , Text, TextInput, StyleSheet } from 'react-native'
 import SearchBar from '../components/SearchBar'
-import yelp from '../api/yelp'
 import useBusinesses from '../hooks/useBusinesses'
+import ResultsList from '../components/ResultsList'
 
 const SearchScreen = () => {
 
@@ -11,8 +11,12 @@ const SearchScreen = () => {
     // custom hook
     const {results, errorMessage, searchAPI } = useBusinesses() 
 
+    const filterResultsByPrice = (price) => {
+        return results.filter(result => result.price === price)
+    }    
+
     return ( 
-        <View>
+        <View style={style.viewStyle}>
             <SearchBar  
                 onSearchTermChange={(newTerm) => setTerm(newTerm)}
                 searchTerm={term} 
@@ -20,12 +24,23 @@ const SearchScreen = () => {
                 />
             <Text>You have {results.length} results </Text>
             {errorMessage  ?  <Text>Oh Oh !!! {errorMessage}</Text>: null}
+
+            <ResultsList results={filterResultsByPrice('$')} title='Cost Effective'/>
+            
+            <ResultsList results={filterResultsByPrice('$$')} title='Bit Pricier'/>
+            
+            <ResultsList results={filterResultsByPrice('$$$$')} title='Big Spender'/>
+
         </View>
     )
 }
 
 const style = StyleSheet.create({
-  
+    viewStyle: {
+        // margin:'10%',
+      //   marginHorizontal:20,
+        marginTop:10,
+    }
 })
 
 export default SearchScreen
