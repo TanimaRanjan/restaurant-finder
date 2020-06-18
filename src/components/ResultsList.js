@@ -45,11 +45,19 @@ const style = StyleSheet.create({
         fontSize:18,
         fontWeight:'bold',
         marginHorizontal:20,
-        marginBottom:5
+        marginBottom:5,
+        shadowColor:'#000',
+        shadowOffset: {width:0, height:2},
+        shadowOpacity:0.2,
+        elevation:2,
+        position:'relative'
     }
     , 
     viewStyle: {
         marginBottom:15,
+        shadowColor:'#000',
+        shadowOffset: {width:0, height:2},
+        shadowOpacity:0.2
         // marginHorizontal:20,
         // paddingVertical:20
     }
